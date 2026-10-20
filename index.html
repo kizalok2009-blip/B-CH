@@ -362,6 +362,11 @@ async function syncToCloud() {
     console.error("Cloud sync failed:", error.message);
   }
 }
+  supabase.auth.onAuthStateChange((event, session) => {
+  if (session) {
+    syncToCloud();
+  }
+});
   const loginBtn = document.getElementById("googleLoginBtn");
   const logoutBtn = document.getElementById("googleLogoutBtn");
   const accountStatus = document.getElementById("accountStatus");
