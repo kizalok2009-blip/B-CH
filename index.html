@@ -574,9 +574,6 @@ function renderWeekly() {
       ).join("")
     : `<div class="empty">Record errors to discover recurring patterns.</div>`;
 
-  if ($("nextWeek")) $("nextWeek").disabled = weekOffset >= 0;
-}
-
 $("prevWeek").addEventListener("click", () => {
   weekOffset--;
   renderWeekly();
