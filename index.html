@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="uz">
 <head>
@@ -64,6 +63,7 @@ margin-top:3px;flex-shrink:0}
 .btn{border:0;border-radius:10px;background:var(--sage);color:white;
 padding:11px 15px;font-weight:600}
 .btn:hover{filter:brightness(.95)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
 .btn.secondary{background:var(--sage-light);color:var(--ink)}
 .btn.outline{background:transparent;border:1px solid var(--line);color:var(--brown)}
 .btn.small-btn{padding:7px 10px;font-size:12px}
@@ -116,12 +116,8 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
   <p class="small" id="accountStatus">
     Sign in to sync your IELTS journal across devices.
   </p>
-  <button class="btn" id="googleLoginBtn" type="button">
-    Continue with Google
-  </button>
-  <button class="btn secondary" id="googleLogoutBtn" type="button" hidden>
-    Sign out
-  </button>
+  <button class="btn" id="googleLoginBtn" type="button">Continue with Google</button>
+  <button class="btn secondary" id="googleLogoutBtn" type="button" hidden>Sign out</button>
 </div>
 
 <section class="page active" id="today">
@@ -151,14 +147,14 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
   <div class="card">
     <div class="card-title">
       <h2 style="margin:0">Today's checklist</h2>
-      <button class="btn outline small-btn" id="clearToday">Clear day</button>
+      <button class="btn outline small-btn" id="clearToday" type="button">Clear day</button>
     </div>
     <div class="quick">
-      <button class="btn secondary" data-add="Reading">＋ Reading</button>
-      <button class="btn secondary" data-add="Listening">＋ Listening</button>
-      <button class="btn secondary" data-add="Writing">＋ Writing</button>
-      <button class="btn secondary" data-add="Speaking">＋ Speaking</button>
-      <button class="btn secondary" data-add="Input">＋ Input</button>
+      <button class="btn secondary" type="button" data-add="Reading">＋ Reading</button>
+      <button class="btn secondary" type="button" data-add="Listening">＋ Listening</button>
+      <button class="btn secondary" type="button" data-add="Writing">＋ Writing</button>
+      <button class="btn secondary" type="button" data-add="Speaking">＋ Speaking</button>
+      <button class="btn secondary" type="button" data-add="Input">＋ Input</button>
     </div>
     <form id="taskForm">
       <div class="field">
@@ -213,9 +209,9 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
           <select id="resultBand">
             <option value="4">4.0</option><option value="4.5">4.5</option>
             <option value="5">5.0</option><option value="5.5">5.5</option>
-            <option value="6">6.0</option><option value="6.5">6.5</option>
+            <option value="6">6.0</option><option value="6.5" selected>6.5</option>
             <option value="7">7.0</option><option value="7.5">7.5</option>
-            <option value="8" selected>8.0</option><option value="8.5">8.5</option>
+            <option value="8">8.0</option><option value="8.5">8.5</option>
             <option value="9">9.0</option>
           </select>
         </div>
@@ -286,13 +282,14 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
   <h1>Weekly report</h1>
   <p style="color:var(--muted);margin-bottom:20px">Review your progress week by week.</p>
 
-<div class="card-title" style="margin-bottom:16px">
-  <button class="btn secondary" id="prevWeek">← Previous week</button>
-  <button class="btn secondary" id="nextWeek">Next week →</button>
-</div>
-<p id="weekRange" class="small"></p>
+  <div class="card-title" style="margin-bottom:8px">
+    <button class="btn secondary" id="prevWeek" type="button">← Previous week</button>
+    <button class="btn secondary" id="nextWeek" type="button">Next week →</button>
+  </div>
+  <p id="weekRange" class="small" style="margin-bottom:14px"></p>
+
   <div class="grid">
-    <div class="card"><div class="eyebrow">TASKS COMPLETED</div><div class="stat" id="weekTasks">0</div><p class="small">Across the last 7 days</p></div>
+    <div class="card"><div class="eyebrow">TASKS COMPLETED</div><div class="stat" id="weekTasks">0</div><p class="small">In the selected 7 days</p></div>
     <div class="card"><div class="eyebrow">PERFECT DAYS</div><div class="stat" id="weekStreak">0</div><p class="small">Days when all planned tasks were done</p></div>
   </div>
   <div class="card"><h2>Daily activity</h2><div id="weekDays"></div></div>
@@ -308,18 +305,18 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
       <label for="examDate">IELTS exam date</label>
       <input id="examDate" type="date" value="2026-12-11">
     </div>
-    <button class="btn" id="saveSettings">Save settings</button>
+    <button class="btn" id="saveSettings" type="button">Save settings</button>
   </div>
   <div class="card">
     <h2>Your data</h2>
     <p class="small" style="margin-bottom:14px">Export your tasks, results and error diary as a JSON backup.</p>
-    <button class="btn" id="exportBtn">↓ Export all data</button>
-    <p class="notice">This version stores data in this browser on this device. Clearing browser data may erase it. Export a backup regularly.</p>
+    <button class="btn" id="exportBtn" type="button">↓ Export all data</button>
+    <p class="notice">Data is stored in this browser. If you sign in with Google, it is also synced to the cloud. Export a backup regularly.</p>
   </div>
   <div class="card">
     <h2>About B&CH</h2>
     <p>A calm botanical workspace for your IELTS journey.</p>
-    <p class="small">Version 1.0 · Made for steady progress.</p>
+    <p class="small">Version 1.1 · Made for steady progress.</p>
   </div>
 </section>
 <footer>Made with patience & a little botanical magic ❧</footer>
@@ -337,381 +334,437 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
 <script>
 (() => {
   const KEY = "bch_ielts_v1";
-  
   const SUPABASE_URL = "https://dlbndkcehjqceuqoutvk.supabase.co";
   const SUPABASE_KEY = "sb_publishable_TKMhU4UAvBLruNSmDwbRxg_W8RmDyuF";
+  const REDIRECT_URL = "https://kizalok2009-blip.github.io/B-CH/";
 
- const supabase = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+  const $ = id => document.getElementById(id);
 
-async function syncToCloud() {
-  const { data: { session } } = await supabase.auth.getSession();
-  if (!session) return;
+  /* ---------- Supabase (CDN yuklanmasa ham ilova ishlayveradi) ---------- */
+  let sb = null;
+  try {
+    if (window.supabase && window.supabase.createClient) {
+      sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
+  } catch (e) {
+    console.error("Supabase init failed:", e);
+  }
 
-  const { error } = await supabase
-    .from("ielts_data")
-    .upsert({
+  /* ---------- Data ---------- */
+  function normalize(raw) {
+    const d = (raw && typeof raw === "object") ? raw : {};
+    return {
+      examDate: d.examDate || "2026-12-11",
+      tasks: (d.tasks && typeof d.tasks === "object") ? d.tasks : {},
+      results: Array.isArray(d.results) ? d.results : [],
+      errors: Array.isArray(d.errors) ? d.errors : [],
+      updatedAt: Number(d.updatedAt) || 0
+    };
+  }
+  let data;
+  try {
+    data = normalize(JSON.parse(localStorage.getItem(KEY) || "{}"));
+  } catch {
+    data = normalize({});
+  }
+
+  /* ---------- Cloud sync ---------- */
+  let syncTimer = null;
+
+  async function pushToCloud() {
+    if (!sb) return;
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) return;
+    const { error } = await sb.from("ielts_data").upsert({
       user_id: session.user.id,
-      app_data: JSON.parse(localStorage.getItem(KEY) || "{}"),
-      updated_at: new Date().toISOString()
+      app_data: data,
+      updated_at: new Date(data.updatedAt || Date.now()).toISOString()
     });
-
-  if (error) {
-    console.error("Cloud sync failed:", error.message);
+    if (error) console.error("Cloud sync failed:", error.message);
   }
-}
-  supabase.auth.onAuthStateChange((event, session) => {
-  if (session) {
-    syncToCloud();
+
+  function scheduleSync() {
+    clearTimeout(syncTimer);
+    syncTimer = setTimeout(() => {
+      pushToCloud().catch(err => console.error("Cloud sync failed:", err));
+    }, 800);
   }
-});
-  const loginBtn = document.getElementById("googleLoginBtn");
-  const logoutBtn = document.getElementById("googleLogoutBtn");
-  const accountStatus = document.getElementById("accountStatus");
 
-  async function updateAccount() {
-    const { data: { session } } = await supabase.auth.getSession();
+  // Kirganda avval bulutdan o'qiydi; yangi bo'lsa — lokalni almashtiradi.
+  async function pullFromCloud() {
+    if (!sb) return;
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) return;
+    const { data: row, error } = await sb
+      .from("ielts_data")
+      .select("app_data, updated_at")
+      .eq("user_id", session.user.id)
+      .maybeSingle();
+    if (error) { console.error("Cloud load failed:", error.message); return; }
 
+    if (!row) { await pushToCloud(); return; }
+
+    const cloudTime = new Date(row.updated_at).getTime() || 0;
+    const localTime = data.updatedAt || 0;
+
+    if (cloudTime > localTime) {
+      data = normalize(row.app_data);
+      data.updatedAt = cloudTime;
+      try { localStorage.setItem(KEY, JSON.stringify(data)); } catch {}
+      renderAll();
+    } else if (localTime > cloudTime) {
+      await pushToCloud();
+    }
+  }
+
+  function save() {
+    data.updatedAt = Date.now();
+    try {
+      localStorage.setItem(KEY, JSON.stringify(data));
+    } catch {
+      alert("Saqlashda muammo bo‘ldi. Ma’lumotlaringni eksport qilib, joy bo‘shat.");
+    }
+    scheduleSync();
+  }
+
+  /* ---------- Account ---------- */
+  const loginBtn = $("googleLoginBtn");
+  const logoutBtn = $("googleLogoutBtn");
+  const accountStatus = $("accountStatus");
+
+  function showAccount(session) {
     if (session) {
       accountStatus.textContent = `Signed in as ${session.user.email}`;
       loginBtn.hidden = true;
       logoutBtn.hidden = false;
     } else {
-      accountStatus.textContent = "Sign in to sync your IELTS journal across devices.";
+      accountStatus.textContent = sb
+        ? "Sign in to sync your IELTS journal across devices."
+        : "Cloud sync is unavailable right now (no connection to the server).";
       loginBtn.hidden = false;
+      loginBtn.disabled = !sb;
       logoutBtn.hidden = true;
     }
   }
 
   loginBtn.addEventListener("click", async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
+    if (!sb) return;
+    const { error } = await sb.auth.signInWithOAuth({
       provider: "google",
-      options: {
-        redirectTo: "https://kizalok2009-blip.github.io/B-CH/"
-      }
+      options: { redirectTo: REDIRECT_URL }
     });
-
     if (error) accountStatus.textContent = error.message;
   });
 
   logoutBtn.addEventListener("click", async () => {
-    await supabase.auth.signOut();
-    await updateAccount();
+    if (!sb) return;
+    await sb.auth.signOut();
+    showAccount(null);
   });
 
-  supabase.auth.onAuthStateChange(() => {
-    updateAccount();
-  });
-
-  updateAccount();
-
-  const defaultData = {
-    examDate:"2026-12-11", tasks:{}, results:[], errors:[]
-  };
-  let data;
-  try {
-    data = {...defaultData, ...JSON.parse(localStorage.getItem(KEY) || "{}")};
-    data.tasks ||= {};
-    data.results ||= [];
-    data.errors ||= [];
-  } catch {
-    data = {...defaultData, tasks:{}, results:[], errors:[]};
+  if (sb) {
+    sb.auth.onAuthStateChange((event, session) => {
+      showAccount(session);
+      if (session && (event === "INITIAL_SESSION" || event === "SIGNED_IN")) {
+        setTimeout(() => {
+          pullFromCloud().catch(err => console.error("Cloud load failed:", err));
+        }, 0);
+      }
+    });
   }
+  showAccount(null);
 
-  const $ = id => document.getElementById(id);
-  const today = () => localDate(new Date());
+  /* ---------- Helpers ---------- */
   function localDate(d) {
     return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
   }
+  const today = () => localDate(new Date());
   function esc(s) {
     return String(s ?? "").replace(/[&<>"']/g, c => ({
       "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
     }[c]));
   }
-  function save() {
-  try {
-    localStorage.setItem(KEY, JSON.stringify(data));
-    if (typeof syncToCloud === "function") {
-      syncToCloud().catch(error =>
-        console.error("Cloud sync failed:", error)
-      );
-    }
-  } catch {
-    alert("Saqlashda muammo bo‘ldi. Ma’lumotlaringni eksport qilib, joy bo‘shat.");
-  }
-}
   function id() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2,7);
   }
   function fmtDate(s) {
     if (!s) return "No date";
-    return new Date(s+"T12:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
+    return new Date(s + "T12:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
   }
   function dayTasks(date) { return data.tasks[date] || []; }
-  function completeCount(list) { return list.filter(t=>t.done).length; }
+  function completeCount(list) { return list.filter(t => t.done).length; }
   function isPerfect(date) {
     const list = dayTasks(date);
-    return list.length > 0 && list.every(t=>t.done);
+    return list.length > 0 && list.every(t => t.done);
   }
   function streak() {
-    let d = new Date();
+    const d = new Date();
     let n = 0;
-    if (!isPerfect(localDate(d))) d.setDate(d.getDate()-1);
+    if (!isPerfect(localDate(d))) d.setDate(d.getDate() - 1);
     while (isPerfect(localDate(d))) {
       n++;
-      d.setDate(d.getDate()-1);
+      d.setDate(d.getDate() - 1);
     }
     return n;
   }
-  function showPage(name) {
-    document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===name));
-    document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===name));
-    if(name==="weekly") renderWeekly();
-    window.scrollTo({top:0,behavior:"smooth"});
-  }
-  document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
 
+  /* ---------- Navigation ---------- */
+  function showPage(name) {
+    document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === name));
+    document.querySelectorAll(".nav button").forEach(b => b.classList.toggle("active", b.dataset.page === name));
+    if (name === "weekly") renderWeekly();
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+  document.querySelectorAll(".nav button").forEach(b =>
+    b.addEventListener("click", () => showPage(b.dataset.page))
+  );
+
+  /* ---------- Header ---------- */
   function renderHeader() {
     $("todayDate").textContent = new Date().toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"});
-    const exam = new Date(data.examDate+"T00:00:00");
-    const diff = Math.ceil((exam-new Date(today()+"T00:00:00"))/86400000);
-    $("countdown").textContent = diff>0 ? `${diff} days until IELTS` : diff===0 ? "IELTS exam day" : "Your IELTS date has passed";
+    const exam = new Date(data.examDate + "T00:00:00");
+    const diff = Math.round((exam - new Date(today() + "T00:00:00")) / 86400000);
+    $("countdown").textContent =
+      diff > 0 ? `${diff} ${diff === 1 ? "day" : "days"} until IELTS`
+      : diff === 0 ? "IELTS exam day"
+      : "Your IELTS date has passed";
     $("examDate").value = data.examDate;
-    $("resultDate").value ||= today();
+    if (!$("resultDate").value) $("resultDate").value = today();
   }
 
+  /* ---------- Tasks ---------- */
   function renderTasks() {
     const list = dayTasks(today());
     const done = completeCount(list);
-    const pct = list.length ? Math.round(done/list.length*100) : 0;
-    $("percent").textContent = pct+"%";
-    $("bar").style.width = pct+"%";
+    const pct = list.length ? Math.round(done / list.length * 100) : 0;
+    const s = streak();
+    $("percent").textContent = pct + "%";
+    $("bar").style.width = pct + "%";
     $("taskCount").textContent = `${done} of ${list.length} tasks completed`;
-    $("streak").textContent = `${streak()} ${streak()===1?"day":"days"}`;
-    $("taskList").innerHTML = list.length ? list.map(t=>`
-      <div class="task ${t.done?"done":""}">
-        <input type="checkbox" data-task="${esc(t.id)}" ${t.done?"checked":""} aria-label="Complete task">
-        <div class="task-text">${esc(t.name)}<span class="task-meta">${esc(t.category)}${t.minutes?` · ${esc(t.minutes)} min`:""}</span></div>
-        <button class="delete" data-delete-task="${esc(t.id)}" aria-label="Delete task">×</button>
-      </div>`).join("") : `<div class="empty">Your page is clear. Add the tasks you want to focus on today. ☘</div>`;
+    $("streak").textContent = `${s} ${s === 1 ? "day" : "days"}`;
+    $("taskList").innerHTML = list.length ? list.map(t => `
+      <div class="task ${t.done ? "done" : ""}">
+        <input type="checkbox" data-task="${esc(t.id)}" ${t.done ? "checked" : ""} aria-label="Complete task">
+        <div class="task-text">${esc(t.name)}<span class="task-meta">${esc(t.category)}${t.minutes ? ` · ${esc(t.minutes)} min` : ""}</span></div>
+        <button class="delete" type="button" data-delete-task="${esc(t.id)}" aria-label="Delete task">×</button>
+      </div>`).join("")
+      : `<div class="empty">Your page is clear. Add the tasks you want to focus on today. ☘</div>`;
   }
-  function addTask(category,name,minutes) {
+  function addTask(category, name, minutes) {
     const date = today();
-    data.tasks[date] ||= [];
-    data.tasks[date].push({id:id(),category,name,minutes:minutes||"",done:false});
-    save(); renderTasks();
+    if (!data.tasks[date]) data.tasks[date] = [];
+    data.tasks[date].push({id:id(), category, name, minutes: minutes || "", done:false});
+    save(); renderTasks(); renderWeekly();
   }
-  $("taskForm").addEventListener("submit",e=>{
+  $("taskForm").addEventListener("submit", e => {
     e.preventDefault();
-    const name=$("taskName").value.trim();
-    if(!name)return;
-    addTask($("taskCategory").value,name,$("taskMinutes").value);
-    $("taskName").value=""; $("taskMinutes").value="";
+    const name = $("taskName").value.trim();
+    if (!name) return;
+    addTask($("taskCategory").value, name, $("taskMinutes").value);
+    $("taskName").value = "";
+    $("taskMinutes").value = "";
   });
-  document.querySelectorAll("[data-add]").forEach(b=>b.addEventListener("click",()=>{
-    $("taskCategory").value=b.dataset.add;
+  document.querySelectorAll("[data-add]").forEach(b => b.addEventListener("click", () => {
+    $("taskCategory").value = b.dataset.add;
     $("taskName").focus();
   }));
-  $("taskList").addEventListener("change",e=>{
-    if(!e.target.matches("[data-task]"))return;
-    const t=dayTasks(today()).find(t=>t.id===e.target.dataset.task);
-    if(t){t.done=e.target.checked;save();renderTasks();renderWeekly();}
+  $("taskList").addEventListener("change", e => {
+    if (!e.target.matches("[data-task]")) return;
+    const t = dayTasks(today()).find(t => t.id === e.target.dataset.task);
+    if (t) { t.done = e.target.checked; save(); renderTasks(); renderWeekly(); }
   });
-  $("taskList").addEventListener("click",e=>{
-    const b=e.target.closest("[data-delete-task]");
-    if(!b)return;
-    data.tasks[today()]=dayTasks(today()).filter(t=>t.id!==b.dataset.deleteTask);
-    save();renderTasks();renderWeekly();
+  $("taskList").addEventListener("click", e => {
+    const b = e.target.closest("[data-delete-task]");
+    if (!b) return;
+    data.tasks[today()] = dayTasks(today()).filter(t => t.id !== b.dataset.deleteTask);
+    save(); renderTasks(); renderWeekly();
   });
-  $("clearToday").addEventListener("click",()=>{
-    if(!dayTasks(today()).length)return;
-    if(confirm("Bugungi barcha vazifalarni o‘chirasanmi?")) {
-      delete data.tasks[today()];save();renderTasks();renderWeekly();
+  $("clearToday").addEventListener("click", () => {
+    if (!dayTasks(today()).length) return;
+    if (confirm("Bugungi barcha vazifalarni o‘chirasanmi?")) {
+      delete data.tasks[today()];
+      save(); renderTasks(); renderWeekly();
     }
   });
 
-  $("resultSkill").addEventListener("change",()=>{
-    const band=["Writing","Speaking"].includes($("resultSkill").value);
-    $("bandField").style.display=band?"flex":"none";
-    $("correctField").style.display=band?"none":"flex";
-  });
-  $("resultForm").addEventListener("submit",e=>{
+  /* ---------- Results ---------- */
+  function toggleResultFields() {
+    const band = ["Writing","Speaking"].includes($("resultSkill").value);
+    $("bandField").style.display = band ? "flex" : "none";
+    $("correctField").style.display = band ? "none" : "flex";
+  }
+  $("resultSkill").addEventListener("change", toggleResultFields);
+
+  $("resultForm").addEventListener("submit", e => {
     e.preventDefault();
-    const skill=$("resultSkill").value, date=$("resultDate").value;
-    const band=["Writing","Speaking"].includes(skill);
-    const value=band?Number($("resultBand").value):Number($("resultCorrect").value);
-    if(!date || (!band && ($("resultCorrect").value==="" || value<0 || value>40))) {
-      alert("Sana va 0–40 oralig‘idagi correct answers sonini kiriting.");return;
+    const skill = $("resultSkill").value;
+    const date = $("resultDate").value;
+    const band = ["Writing","Speaking"].includes(skill);
+    const raw = $("resultCorrect").value;
+    const value = band ? Number($("resultBand").value) : Number(raw);
+    if (!date || (!band && (raw === "" || !Number.isFinite(value) || value < 0 || value > 40))) {
+      alert("Sana va 0–40 oralig‘idagi correct answers sonini kiriting.");
+      return;
     }
-    data.results.unshift({id:id(),skill,date,kind:band?"band":"correct",value,note:$("resultNote").value.trim()});
-    save();$("resultNote").value="";$("resultCorrect").value="";
+    data.results.unshift({id:id(), skill, date, kind: band ? "band" : "correct", value, note: $("resultNote").value.trim()});
+    data.results.sort((a, b) => b.date.localeCompare(a.date));
+    save();
+    $("resultNote").value = "";
+    $("resultCorrect").value = "";
     renderResults();
   });
+
   function renderResults() {
-    const skills=["Reading","Listening","Writing","Speaking"];
-    $("skillStats").innerHTML=skills.map(skill=>{
-      const last=data.results.find(r=>r.skill===skill);
+    const skills = ["Reading","Listening","Writing","Speaking"];
+    $("skillStats").innerHTML = skills.map(skill => {
+      const last = data.results.find(r => r.skill === skill);
       return `<div class="card"><div class="eyebrow">${skill.toUpperCase()}</div>
-        <div class="stat">${last?(last.kind==="band"?Number(last.value).toFixed(1):`${last.value}/40`):"—"}</div>
-        <p class="small">${last?`Latest · ${fmtDate(last.date)}`:"No result recorded yet"}</p></div>`;
+        <div class="stat">${last ? (last.kind === "band" ? Number(last.value).toFixed(1) : `${esc(last.value)}/40`) : "—"}</div>
+        <p class="small">${last ? `Latest · ${fmtDate(last.date)}` : "No result recorded yet"}</p></div>`;
     }).join("");
-    $("resultList").innerHTML=data.results.length?data.results.map(r=>`
+    $("resultList").innerHTML = data.results.length ? data.results.map(r => `
       <div class="record">
-        <div class="card-title"><strong>${esc(r.skill)} · ${r.kind==="band"?"Band "+Number(r.value).toFixed(1):esc(r.value)+"/40"}</strong>
-        <button class="delete" data-delete-result="${esc(r.id)}" aria-label="Delete result">×</button></div>
+        <div class="card-title"><strong>${esc(r.skill)} · ${r.kind === "band" ? "Band " + Number(r.value).toFixed(1) : esc(r.value) + "/40"}</strong>
+        <button class="delete" type="button" data-delete-result="${esc(r.id)}" aria-label="Delete result">×</button></div>
         <span class="small">${fmtDate(r.date)}</span>
-        ${r.note?`<p>${esc(r.note)}</p>`:""}
-      </div>`).join(""):`<div class="empty">Your test history will appear here.</div>`;
+        ${r.note ? `<p>${esc(r.note)}</p>` : ""}
+      </div>`).join("") : `<div class="empty">Your test history will appear here.</div>`;
   }
-  $("resultList").addEventListener("click",e=>{
-    const b=e.target.closest("[data-delete-result]");if(!b)return;
-    data.results=data.results.filter(r=>r.id!==b.dataset.deleteResult);
-    save();renderResults();
+  $("resultList").addEventListener("click", e => {
+    const b = e.target.closest("[data-delete-result]");
+    if (!b) return;
+    data.results = data.results.filter(r => r.id !== b.dataset.deleteResult);
+    save(); renderResults();
   });
 
-  $("errorForm").addEventListener("submit",e=>{
+  /* ---------- Errors ---------- */
+  $("errorForm").addEventListener("submit", e => {
     e.preventDefault();
-    const error={id:id(),skill:$("errorSkill").value,date:today(),
-      review:$("reviewDate").value,question:$("errorQuestion").value.trim(),
-      cause:$("errorCause").value.trim(),correct:$("errorCorrect").value.trim(),
-      extra:$("errorExtra").value.trim(),checked:false};
-    if(!error.question||!error.cause||!error.correct)return;
-    data.errors.unshift(error);save();$("errorForm").reset();renderErrors();
+    const error = {
+      id:id(), skill:$("errorSkill").value, date:today(),
+      review:$("reviewDate").value, question:$("errorQuestion").value.trim(),
+      cause:$("errorCause").value.trim(), correct:$("errorCorrect").value.trim(),
+      extra:$("errorExtra").value.trim(), checked:false
+    };
+    if (!error.question || !error.cause || !error.correct) return;
+    data.errors.unshift(error);
+    save();
+    $("errorForm").reset();
+    renderErrors(); renderWeekly();
   });
+
   function renderErrors() {
-    $("errorCount").textContent=data.errors.length;
-    $("errorList").innerHTML=data.errors.length?data.errors.map(r=>`
+    $("errorCount").textContent = data.errors.length;
+    $("errorList").innerHTML = data.errors.length ? data.errors.map(r => `
       <div class="record">
         <div class="card-title">
           <span class="pill">${esc(r.skill)}</span>
-          <button class="delete" data-delete-error="${esc(r.id)}" aria-label="Delete error">×</button>
+          <button class="delete" type="button" data-delete-error="${esc(r.id)}" aria-label="Delete error">×</button>
         </div>
         <p><strong>Error:</strong> ${esc(r.question)}</p>
         <p><strong>Cause:</strong> ${esc(r.cause)}</p>
         <p><strong>Correct version:</strong> ${esc(r.correct)}</p>
-        ${r.extra?`<p><strong>Notes:</strong> ${esc(r.extra)}</p>`:""}
-        <p class="small">Review: ${fmtDate(r.review)} ${r.review && r.review<=today()&&!r.checked?"· Due to review":""}</p>
-        <label class="small"><input type="checkbox" data-review="${esc(r.id)}" ${r.checked?"checked":""}> Reviewed again</label>
-      </div>`).join(""):`<div class="empty">No errors saved yet. Each mistake can become useful feedback.</div>`;
+        ${r.extra ? `<p><strong>Notes:</strong> ${esc(r.extra)}</p>` : ""}
+        <p class="small">Review: ${fmtDate(r.review)} ${r.review && r.review <= today() && !r.checked ? "· Due to review" : ""}</p>
+        <label class="small"><input type="checkbox" data-review="${esc(r.id)}" ${r.checked ? "checked" : ""}> Reviewed again</label>
+      </div>`).join("") : `<div class="empty">No errors saved yet. Each mistake can become useful feedback.</div>`;
   }
-  $("errorList").addEventListener("click",e=>{
-    const del=e.target.closest("[data-delete-error]");
-    if(del){data.errors=data.errors.filter(r=>r.id!==del.dataset.deleteError);save();renderErrors();return;}
-    if(e.target.matches("[data-review]")){
-      const r=data.errors.find(r=>r.id===e.target.dataset.review);
-      if(r){r.checked=e.target.checked;save();}
+  $("errorList").addEventListener("click", e => {
+    const del = e.target.closest("[data-delete-error]");
+    if (del) {
+      data.errors = data.errors.filter(r => r.id !== del.dataset.deleteError);
+      save(); renderErrors(); renderWeekly();
     }
   });
-
-let weekOffset = 0;
-
-function renderWeekly() {
-  const dates = [];
-  const end = new Date();
-  end.setDate(end.getDate() + weekOffset * 7);
-
-  for (let i = 6; i >= 0; i--) {
-    const d = new Date(end);
-    d.setDate(d.getDate() - i);
-    dates.push(localDate(d));
-  }
-
-  let total = 0, perfect = 0;
-
-  dates.forEach(d => {
-    total += completeCount(dayTasks(d));
-    if (isPerfect(d)) perfect++;
+  $("errorList").addEventListener("change", e => {
+    if (!e.target.matches("[data-review]")) return;
+    const r = data.errors.find(r => r.id === e.target.dataset.review);
+    if (r) { r.checked = e.target.checked; save(); renderErrors(); }
   });
 
-  $("weekTasks").textContent = total;
-  $("weekStreak").textContent = perfect;
+  /* ---------- Weekly ---------- */
+  let weekOffset = 0;
 
-  if ($("weekRange")) {
-    $("weekRange").textContent =
-      `${fmtDate(dates[0])} – ${fmtDate(dates[6])}`;
+  function renderWeekly() {
+    const dates = [];
+    const end = new Date();
+    end.setDate(end.getDate() + weekOffset * 7);
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(end);
+      d.setDate(d.getDate() - i);
+      dates.push(localDate(d));
+    }
+
+    let total = 0, perfect = 0;
+    dates.forEach(d => {
+      total += completeCount(dayTasks(d));
+      if (isPerfect(d)) perfect++;
+    });
+
+    $("weekTasks").textContent = total;
+    $("weekStreak").textContent = perfect;
+    $("weekRange").textContent = `${fmtDate(dates[0])} – ${fmtDate(dates[6])}`;
+    $("nextWeek").disabled = weekOffset >= 0;
+
+    $("weekDays").innerHTML = dates.map(d => {
+      const list = dayTasks(d);
+      const done = completeCount(list);
+      const pct = list.length ? Math.round(done / list.length * 100) : 0;
+      return `<div style="margin:13px 0">
+        <div class="card-title" style="margin-bottom:0">
+          <span>${fmtDate(d)}</span>
+          <span class="small">${done}/${list.length}</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+      </div>`;
+    }).join("");
+
+    const counts = {};
+    data.errors.forEach(e => { counts[e.skill] = (counts[e.skill] || 0) + 1; });
+    const recurring = Object.entries(counts).filter(([, n]) => n > 1).sort((a, b) => b[1] - a[1]);
+    $("recurringErrors").innerHTML = recurring.length
+      ? recurring.map(([skill, n]) => `<p>${esc(skill)}: <strong>${n} recorded errors</strong></p>`).join("")
+      : `<div class="empty">Record errors to discover recurring patterns.</div>`;
   }
 
-  $("weekDays").innerHTML = dates.map(d => {
-    const list = dayTasks(d);
-    const done = completeCount(list);
-    const pct = list.length
-      ? Math.round(done / list.length * 100)
-      : 0;
-
-    return `<div style="margin:13px 0">
-      <div class="card-title">
-        <span>${fmtDate(d)}</span>
-        <span class="small">${done}/${list.length}</span>
-      </div>
-      <div class="progress-track">
-        <div class="progress-fill" style="width:${pct}%"></div>
-      </div>
-    </div>`;
-  }).join("");
-
-  const counts = {};
-  data.errors.forEach(e => {
-    counts[e.skill] = (counts[e.skill] || 0) + 1;
+  $("prevWeek").addEventListener("click", () => { weekOffset--; renderWeekly(); });
+  $("nextWeek").addEventListener("click", () => {
+    if (weekOffset < 0) { weekOffset++; renderWeekly(); }
   });
 
-  const recurring = Object.entries(counts)
-    .filter(([, n]) => n > 1)
-    .sort((a, b) => b[1] - a[1]);
+  /* ---------- Settings ---------- */
+  $("saveSettings").addEventListener("click", () => {
+    data.examDate = $("examDate").value || "2026-12-11";
+    save();
+    renderHeader();
+    alert("Settings saved.");
+  });
 
-  $("recurringErrors").innerHTML = recurring.length
-    ? recurring.map(([skill, n]) =>
-        `<p>${esc(skill)}: <strong>${n} recorded errors</strong></p>`
-      ).join("")
-    : `<div class="empty">Record errors to discover recurring patterns.</div>`;
+  $("exportBtn").addEventListener("click", () => {
+    const blob = new Blob(
+      [JSON.stringify({...data, exportedAt: new Date().toISOString()}, null, 2)],
+      {type: "application/json"}
+    );
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "B-CH-backup-" + today() + ".json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
 
-
-  if ($("prevWeek")) {
-    $("prevWeek").addEventListener("click", () => {
-      weekOffset--;
-      renderWeekly();
-    });
+  /* ---------- Init ---------- */
+  function renderAll() {
+    renderHeader();
+    renderTasks();
+    renderResults();
+    renderErrors();
+    renderWeekly();
   }
-
-  if ($("nextWeek")) {
-    $("nextWeek").addEventListener("click", () => {
-      if (weekOffset < 0) {
-        weekOffset++;
-        renderWeekly();
-      }
-    });
-  }
-}
-
-$("saveSettings").addEventListener("click", () => {
-  data.examDate = $("examDate").value || "2026-12-11";
-  save();
-  renderHeader();
-  alert("Settings saved.");
-});
-
-$("exportBtn").addEventListener("click", () => {
-  const blob = new Blob(
-    [JSON.stringify({...data, exportedAt: new Date().toISOString()}, null, 2)],
-    {type: "application/json"}
-  );
-
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-
-  a.href = url;
-  a.download = "B-CH-backup-" + today() + ".json";
-  a.click();
-
-  URL.revokeObjectURL(url);
-});
-
-renderHeader();
-renderTasks();
-renderResults();
-renderErrors();
-renderWeekly();
+  toggleResultFields();
+  renderAll();
 })();
 </script>
 </body>
