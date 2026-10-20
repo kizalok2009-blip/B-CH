@@ -588,7 +588,8 @@ $("nextWeek").addEventListener("click", () => {
     renderWeekly();
   }
 });
-    data.examDate=$("examDate").value||"2026-12-11";
+  $("saveSettings").addEventListener("click",()=>{  
+  data.examDate=$("examDate").value||"2026-12-11";
     save();renderHeader();alert("Settings saved.");
   });
   $("exportBtn").addEventListener("click",()=>{
