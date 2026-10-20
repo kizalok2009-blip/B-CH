@@ -341,11 +341,27 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
   const SUPABASE_URL = "https://dlbndkcehjqceuqoutvk.supabase.co";
   const SUPABASE_KEY = "sb_publishable_TKMhU4UAvBLruNSmDwbRxg_W8RmDyuF";
 
-  const supabase = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+ const supabase = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
+async function syncToCloud() {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) return;
+
+  const { error } = await supabase
+    .from("ielts_data")
+    .upsert({
+      user_id: session.user.id,
+      app_data: JSON.parse(localStorage.getItem(KEY) || "{}"),
+      updated_at: new Date().toISOString()
+    });
+
+  if (error) {
+    console.error("Cloud sync failed:", error.message);
+  }
+}
   const loginBtn = document.getElementById("googleLoginBtn");
   const logoutBtn = document.getElementById("googleLogoutBtn");
   const accountStatus = document.getElementById("accountStatus");
