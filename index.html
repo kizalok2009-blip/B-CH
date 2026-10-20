@@ -337,6 +337,55 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
 <script>
 (() => {
   const KEY = "bch_ielts_v1";
+  
+  const SUPABASE_URL = "https://dlbndkcehjqceuqoutvk.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_TKMhU4UAvBLruNSmDwbRxg_W8RmDyuF";
+
+  const supabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  const loginBtn = document.getElementById("googleLoginBtn");
+  const logoutBtn = document.getElementById("googleLogoutBtn");
+  const accountStatus = document.getElementById("accountStatus");
+
+  async function updateAccount() {
+    const { data: { session } } = await supabase.auth.getSession();
+
+    if (session) {
+      accountStatus.textContent = `Signed in as ${session.user.email}`;
+      loginBtn.hidden = true;
+      logoutBtn.hidden = false;
+    } else {
+      accountStatus.textContent = "Sign in to sync your IELTS journal across devices.";
+      loginBtn.hidden = false;
+      logoutBtn.hidden = true;
+    }
+  }
+
+  loginBtn.addEventListener("click", async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: "https://kizalok2009-blip.github.io/B-CH/"
+      }
+    });
+
+    if (error) accountStatus.textContent = error.message;
+  });
+
+  logoutBtn.addEventListener("click", async () => {
+    await supabase.auth.signOut();
+    await updateAccount();
+  });
+
+  supabase.auth.onAuthStateChange(() => {
+    updateAccount();
+  });
+
+  updateAccount();
+
   const defaultData = {
     examDate:"2026-12-11", tasks:{}, results:[], errors:[]
   };
