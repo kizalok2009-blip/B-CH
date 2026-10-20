@@ -513,29 +513,81 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
     }
   });
 
-  function renderWeekly() {
-    const dates=[];
-    for(let i=6;i>=0;i--){
-      const d=new Date();d.setDate(d.getDate()-i);dates.push(localDate(d));
-    }
-    let total=0,perfect=0;
-    dates.forEach(d=>{total+=completeCount(dayTasks(d));if(isPerfect(d))perfect++;});
-    $("weekTasks").textContent=total;
-    $("weekStreak").textContent=perfect;
-    $("weekDays").innerHTML=dates.map(d=>{
-      const list=dayTasks(d),done=completeCount(list),pct=list.length?Math.round(done/list.length*100):0;
-      return `<div style="margin:13px 0">
-        <div class="card-title"><span>${fmtDate(d)}</span><span class="small">${done}/${list.length}</span></div>
-        <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
-      </div>`;
-    }).join("");
-    const counts={};
-    data.errors.forEach(e=>counts[e.skill]=(counts[e.skill]||0)+1);
-    const recurring=Object.entries(counts).filter(([,n])=>n>1).sort((a,b)=>b[1]-a[1]);
-    $("recurringErrors").innerHTML=recurring.length?recurring.map(([skill,n])=>`<p>${esc(skill)}: <strong>${n} recorded errors</strong></p>`).join(""):`<div class="empty">Record errors to discover recurring patterns.</div>`;
+let weekOffset = 0;
+
+function renderWeekly() {
+  const dates = [];
+  const end = new Date();
+  end.setDate(end.getDate() + weekOffset * 7);
+
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(end);
+    d.setDate(d.getDate() - i);
+    dates.push(localDate(d));
   }
 
-  $("saveSettings").addEventListener("click",()=>{
+  let total = 0, perfect = 0;
+
+  dates.forEach(d => {
+    total += completeCount(dayTasks(d));
+    if (isPerfect(d)) perfect++;
+  });
+
+  $("weekTasks").textContent = total;
+  $("weekStreak").textContent = perfect;
+
+  if ($("weekRange")) {
+    $("weekRange").textContent =
+      `${fmtDate(dates[0])} – ${fmtDate(dates[6])}`;
+  }
+
+  $("weekDays").innerHTML = dates.map(d => {
+    const list = dayTasks(d);
+    const done = completeCount(list);
+    const pct = list.length
+      ? Math.round(done / list.length * 100)
+      : 0;
+
+    return `<div style="margin:13px 0">
+      <div class="card-title">
+        <span>${fmtDate(d)}</span>
+        <span class="small">${done}/${list.length}</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width:${pct}%"></div>
+      </div>
+    </div>`;
+  }).join("");
+
+  const counts = {};
+  data.errors.forEach(e => {
+    counts[e.skill] = (counts[e.skill] || 0) + 1;
+  });
+
+  const recurring = Object.entries(counts)
+    .filter(([, n]) => n > 1)
+    .sort((a, b) => b[1] - a[1]);
+
+  $("recurringErrors").innerHTML = recurring.length
+    ? recurring.map(([skill, n]) =>
+        `<p>${esc(skill)}: <strong>${n} recorded errors</strong></p>`
+      ).join("")
+    : `<div class="empty">Record errors to discover recurring patterns.</div>`;
+
+  if ($("nextWeek")) $("nextWeek").disabled = weekOffset >= 0;
+}
+
+$("prevWeek").addEventListener("click", () => {
+  weekOffset--;
+  renderWeekly();
+});
+
+$("nextWeek").addEventListener("click", () => {
+  if (weekOffset < 0) {
+    weekOffset++;
+    renderWeekly();
+  }
+});
     data.examDate=$("examDate").value||"2026-12-11";
     save();renderHeader();alert("Settings saved.");
   });
