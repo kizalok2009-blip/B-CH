@@ -271,7 +271,13 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
 <section class="page" id="weekly">
   <div class="eyebrow">SMALL STEPS ADD UP</div>
   <h1>Weekly report</h1>
-  <p style="color:var(--muted);margin-bottom:20px">A snapshot of your latest seven days.</p>
+  <p style="color:var(--muted);margin-bottom:20px">Review your progress week by week.</p>
+
+<div class="card-title" style="margin-bottom:16px">
+  <button class="btn secondary" id="prevWeek">← Previous week</button>
+  <button class="btn secondary" id="nextWeek">Next week →</button>
+</div>
+<p id="weekRange" class="small"></p>
   <div class="grid">
     <div class="card"><div class="eyebrow">TASKS COMPLETED</div><div class="stat" id="weekTasks">0</div><p class="small">Across the last 7 days</p></div>
     <div class="card"><div class="eyebrow">PERFECT DAYS</div><div class="stat" id="weekStreak">0</div><p class="small">Days when all planned tasks were done</p></div>
