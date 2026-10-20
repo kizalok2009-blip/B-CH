@@ -637,29 +637,52 @@ function renderWeekly() {
       ).join("")
     : `<div class="empty">Record errors to discover recurring patterns.</div>`;
 
-$("prevWeek").addEventListener("click", () => {
-  weekOffset--;
-  renderWeekly();
-});
 
-$("nextWeek").addEventListener("click", () => {
-  if (weekOffset < 0) {
-    weekOffset++;
-    renderWeekly();
+  if ($("prevWeek")) {
+    $("prevWeek").addEventListener("click", () => {
+      weekOffset--;
+      renderWeekly();
+    });
   }
-});
-  $("saveSettings").addEventListener("click",()=>{  
-  data.examDate=$("examDate").value||"2026-12-11";
-    save();renderHeader();alert("Settings saved.");
-  });
-  $("exportBtn").addEventListener("click",()=>{
-    const blob=new Blob([JSON.stringify({...data,exportedAt:new Date().toISOString()},null,2)],{type:"application/json"});
-    const url=URL.createObjectURL(blob),a=document.createElement("a");
-    a.href=url;a.download="B-CH-backup-"+today()+".json";a.click();
-    URL.revokeObjectURL(url);
-  });
 
-  renderHeader();renderTasks();renderResults();renderErrors();renderWeekly();
+  if ($("nextWeek")) {
+    $("nextWeek").addEventListener("click", () => {
+      if (weekOffset < 0) {
+        weekOffset++;
+        renderWeekly();
+      }
+    });
+  }
+}
+
+$("saveSettings").addEventListener("click", () => {
+  data.examDate = $("examDate").value || "2026-12-11";
+  save();
+  renderHeader();
+  alert("Settings saved.");
+});
+
+$("exportBtn").addEventListener("click", () => {
+  const blob = new Blob(
+    [JSON.stringify({...data, exportedAt: new Date().toISOString()}, null, 2)],
+    {type: "application/json"}
+  );
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = "B-CH-backup-" + today() + ".json";
+  a.click();
+
+  URL.revokeObjectURL(url);
+});
+
+renderHeader();
+renderTasks();
+renderResults();
+renderErrors();
+renderWeekly();
 })();
 </script>
 </body>
