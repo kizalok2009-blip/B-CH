@@ -1,5 +1,6 @@
 
 
+
 {
   "id": "/B-CH/",
   "name": "B&CH IELTS Journal",
@@ -16,11 +17,10 @@
   "categories": ["education"],
   "icons": [
     {
-      "src": "/B-CH/preview.webp",
-      "sizes": "512x512",
-      "type": "image/webp",
+      "src": "/B-CH/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "any"
     }
   ]
 }
-
