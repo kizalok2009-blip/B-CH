@@ -426,9 +426,17 @@ async function syncToCloud() {
     }[c]));
   }
   function save() {
-    try { localStorage.setItem(KEY, JSON.stringify(data)); }
-    catch { alert("Saqlashda muammo bo‘ldi. Ma’lumotlaringni eksport qilib, joy bo‘shat."); }
+  try {
+    localStorage.setItem(KEY, JSON.stringify(data));
+    if (typeof syncToCloud === "function") {
+      syncToCloud().catch(error =>
+        console.error("Cloud sync failed:", error)
+      );
+    }
+  } catch {
+    alert("Saqlashda muammo bo‘ldi. Ma’lumotlaringni eksport qilib, joy bo‘shat.");
   }
+}
   function id() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2,7);
   }
