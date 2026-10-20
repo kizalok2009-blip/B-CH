@@ -1,29 +1,4 @@
 
-{
-  "id": "/B-CH/",
-  "name": "B&CH IELTS Journal",
-  "short_name": "B&CH",
-  "description": "Track IELTS study tasks, progress, and mistakes in one place.",
-  "start_url": "/B-CH/",
-  "scope": "/B-CH/",
-  "display": "standalone",
-  "orientation": "any",
-  "dir": "ltr",
-  "lang": "en",
-  "background_color": "#f7f4ec",
-  "theme_color": "#536b52",
-  "categories": [
-    "education"
-  ],
-  "icons": [
-    {
-      "src": "/B-CH/preview.webp",
-      "sizes": "512x512",
-      "type": "image/webp",
-      "purpose": "any"
-    }
-  ]
-}
 
 {
   "id": "/B-CH/",
@@ -38,7 +13,14 @@
   "lang": "en",
   "background_color": "#f7f4ec",
   "theme_color": "#536b52",
-  "categories": [
-    "education"
+  "categories": ["education"],
+  "icons": [
+    {
+      "src": "/B-CH/preview.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any"
+    }
   ]
 }
+
